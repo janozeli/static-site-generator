@@ -1,6 +1,3 @@
-from textnode import TextNode, TextType
-
-
 def main() -> None:
     pass
 

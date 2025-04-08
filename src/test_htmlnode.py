@@ -1,5 +1,4 @@
 import unittest
-from typing import List, Dict, Optional
 
 from htmlnode import HTMLNode
 
@@ -50,7 +49,10 @@ class TestHTMLNode(unittest.TestCase):
         # Testa representação com filhos
         self.assertEqual(
             repr(self.node_com_filhos),
-            f"HTMLNode(div, , [{repr(self.node_filho)}], {{'id': 'container'}})",
+            f"HTMLNode(div, , [{
+                repr(
+                    self.node_filho)}], {
+                'id': 'container'} )",
         )
 
         # Testa representação de nó vazio

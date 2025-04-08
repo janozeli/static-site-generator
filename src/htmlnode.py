@@ -1,4 +1,4 @@
-from typing import Optional, List, Dict, Any
+from typing import Dict, List, Optional
 
 
 class HTMLNode:
@@ -15,16 +15,20 @@ class HTMLNode:
         self.props = props
 
     def __repr__(self) -> str:
-        return f"HTMLNode({self.tag}, {self.value}, {self.children}, {self.props})"
+        return f"HTMLNode({
+            self.tag}, {
+            self.value}, {
+            self.children}, {
+                self.props})"
 
     def to_html(self) -> str:
         raise NotImplementedError
 
     def props_to_html(self) -> str:
         return f" {" ".join(
-                list(
-                    map(
-                        lambda x: f'{x[0]}="{x[1]}"', self.props.items()
-                    )
+            list(
+                map(
+                    lambda x: f'{x[0]}="{x[1]}"', self.props.items()
                 )
-            )}"
+            )
+        )}"

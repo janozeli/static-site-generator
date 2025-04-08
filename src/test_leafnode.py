@@ -1,4 +1,5 @@
 import unittest
+
 from leafnode import LeafNode
 
 
@@ -12,8 +13,8 @@ class TestLeafNode(unittest.TestCase):
         self.node_sem_tag = LeafNode(None, "Raw text")
         self.node_sem_valor = LeafNode("p", "")
         self.node_props_multiplas = LeafNode(
-            "button", "Submit", {"type": "submit", "class": "btn", "id": "submit-btn"}
-        )
+            "button", "Submit", {
+                "type": "submit", "class": "btn", "id": "submit-btn"})
         self.node_props_vazias = LeafNode("span", "Empty props", {})
 
     def test_init(self) -> None:
@@ -26,7 +27,9 @@ class TestLeafNode(unittest.TestCase):
         # Testa inicialização com propriedades
         self.assertEqual(self.node_com_props.tag, "a")
         self.assertEqual(self.node_com_props.value, "Click me!")
-        self.assertEqual(self.node_com_props.props, {"href": "https://www.google.com"})
+        self.assertEqual(
+            self.node_com_props.props, {
+                "href": "https://www.google.com"})
 
         # Testa inicialização sem tag
         self.assertIsNone(self.node_sem_tag.tag)
@@ -66,11 +69,14 @@ class TestLeafNode(unittest.TestCase):
 
     def test_to_html_empty_props(self) -> None:
         # Testa que props vazias são tratadas corretamente
-        self.assertEqual(self.node_props_vazias.to_html(), "<span>Empty props</span>")
+        self.assertEqual(
+            self.node_props_vazias.to_html(),
+            "<span>Empty props</span>")
 
     def test_repr(self) -> None:
         # Testa representação de string do objeto
-        self.assertEqual(repr(self.node_simples), "HTMLNode(p, Hello, world!, [], {})")
+        self.assertEqual(repr(self.node_simples),
+                         "HTMLNode(p, Hello, world!, [], {})")
 
         self.assertEqual(
             repr(self.node_com_props),
