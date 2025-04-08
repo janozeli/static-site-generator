@@ -1,10 +1,11 @@
 import unittest
+from typing import Any
 
-from src.textnode import TextNode, TextType
+from textnode import TextNode, TextType
 
 
 class TestTextNode(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         # Configuração comum para os testes
         self.node_normal = TextNode("Texto normal", TextType.NORMAL)
         self.node_bold = TextNode("Texto em negrito", TextType.BOLD)
@@ -18,7 +19,7 @@ class TestTextNode(unittest.TestCase):
         )
         self.node_vazio = TextNode("", TextType.NORMAL)
 
-    def test_init(self):
+    def test_init(self) -> None:
         # Testa inicialização básica
         self.assertEqual(self.node_normal.text, "Texto normal")
         self.assertEqual(self.node_normal.text_type, TextType.NORMAL)
@@ -36,7 +37,7 @@ class TestTextNode(unittest.TestCase):
         # Testa inicialização com texto vazio
         self.assertEqual(self.node_vazio.text, "")
 
-    def test_eq(self):
+    def test_eq(self) -> None:
         # Testa igualdade de nós com mesmo conteúdo
         node_normal_duplicado = TextNode("Texto normal", TextType.NORMAL)
         self.assertEqual(self.node_normal, node_normal_duplicado)
@@ -60,7 +61,7 @@ class TestTextNode(unittest.TestCase):
         )
         self.assertEqual(self.node_link, node_link_duplicado)
 
-    def test_repr(self):
+    def test_repr(self) -> None:
         # Testa representação de nó normal
         self.assertEqual(repr(self.node_normal), "TextNode(Texto normal, 1, None)")
 
@@ -76,14 +77,14 @@ class TestTextNode(unittest.TestCase):
         # Testa representação de nó vazio
         self.assertEqual(repr(self.node_vazio), "TextNode(, 1, None)")
 
-    def test_edge_cases(self):
-        # Testa com texto None
-        node_texto_none = TextNode(None, TextType.NORMAL)
-        self.assertIsNone(node_texto_none.text)
+    def test_edge_cases(self) -> None:
+        # Testa com texto None - corrigido para string vazia
+        node_texto_none = TextNode("", TextType.NORMAL)
+        self.assertEqual(node_texto_none.text, "")
 
-        # Testa com texto numérico
-        node_texto_numero = TextNode(42, TextType.NORMAL)
-        self.assertEqual(node_texto_numero.text, 42)
+        # Testa com texto numérico - corrigido para string
+        node_texto_numero = TextNode("42", TextType.NORMAL)
+        self.assertEqual(node_texto_numero.text, "42")
 
         # Testa com URL vazia
         node_url_vazia = TextNode("Link vazio", TextType.LINK, "")
@@ -100,8 +101,8 @@ class TestTextNode(unittest.TestCase):
             pass
 
         outro_obj = OutroObjeto()
-        with self.assertRaises(AttributeError):
-            self.node_normal == outro_obj
+        # Agora o test não vai gerar AttributeError por causa da verificação de tipo no __eq__
+        self.assertFalse(self.node_normal == outro_obj)
 
 
 if __name__ == "__main__":

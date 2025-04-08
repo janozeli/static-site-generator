@@ -1,5 +1,14 @@
+from typing import Optional, List, Dict, Any
+
+
 class HTMLNode:
-    def __init__(self, tag, value, children, props):
+    def __init__(
+        self,
+        tag: Optional[str],
+        value: Optional[str],
+        children: List["HTMLNode"],
+        props: Dict[str, str],
+    ) -> None:
         self.tag = tag
         self.value = value
         self.children = children
@@ -8,10 +17,10 @@ class HTMLNode:
     def __repr__(self) -> str:
         return f"HTMLNode({self.tag}, {self.value}, {self.children}, {self.props})"
 
-    def to_html(self):
+    def to_html(self) -> str:
         raise NotImplementedError
 
-    def props_to_html(self):
+    def props_to_html(self) -> str:
         return f" {" ".join(
                 list(
                     map(

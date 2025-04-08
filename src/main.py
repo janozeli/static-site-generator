@@ -1,7 +1,7 @@
 from textnode import TextNode, TextType
 
 
-def main():
+def main() -> None:
     pass
 
 
