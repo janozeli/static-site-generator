@@ -29,7 +29,8 @@ class TestLeafNode(unittest.TestCase):
         # Testa inicialização com propriedades
         self.assertEqual(self.node_com_props.tag, "a")
         self.assertEqual(self.node_com_props.value, "Click me!")
-        self.assertEqual(self.node_com_props.props, {"href": "https://www.google.com"})
+        props = {"href": "https://www.google.com"}
+        self.assertEqual(self.node_com_props.props, props)
 
         # Testa inicialização sem tag
         self.assertIsNone(self.node_sem_tag.tag)
@@ -37,19 +38,15 @@ class TestLeafNode(unittest.TestCase):
 
         # Testa inicialização com múltiplas propriedades
         self.assertEqual(self.node_props_multiplas.tag, "button")
-        self.assertEqual(
-            self.node_props_multiplas.props,
-            {"type": "submit", "class": "btn", "id": "submit-btn"},
-        )
+        expected_props = {"type": "submit", "class": "btn", "id": "submit-btn"}
+        self.assertEqual(self.node_props_multiplas.props, expected_props)
 
     def test_to_html_p(self) -> None:
         self.assertEqual(self.node_simples.to_html(), "<p>Hello, world!</p>")
 
     def test_to_html_with_props(self) -> None:
-        self.assertEqual(
-            self.node_com_props.to_html(),
-            '<a href="https://www.google.com">Click me!</a>',
-        )
+        expected_html = '<a href="https://www.google.com">Click me!</a>'
+        self.assertEqual(self.node_com_props.to_html(), expected_html)
 
         # Testa com múltiplas propriedades
         html = self.node_props_multiplas.to_html()
@@ -69,16 +66,18 @@ class TestLeafNode(unittest.TestCase):
 
     def test_to_html_empty_props(self) -> None:
         # Testa que props vazias são tratadas corretamente
-        self.assertEqual(self.node_props_vazias.to_html(), "<span>Empty props</span>")
+        expected_html = "<span>Empty props</span>"
+        self.assertEqual(self.node_props_vazias.to_html(), expected_html)
 
     def test_repr(self) -> None:
         # Testa representação de string do objeto
-        self.assertEqual(repr(self.node_simples), "HTMLNode(p, Hello, world!, [], {})")
+        expected_simple = "HTMLNode(p, Hello, world!, [], {})"
+        self.assertEqual(repr(self.node_simples), expected_simple)
 
-        self.assertEqual(
-            repr(self.node_com_props),
-            "HTMLNode(a, Click me!, [], {'href': 'https://www.google.com'})",
-        )
+        # Uso string literal para evitar problemas com formatadores
+        props_str = "{'href': 'https://www.google.com'}"
+        expected_repr = f"HTMLNode(a, Click me!, [], {props_str})"
+        self.assertEqual(repr(self.node_com_props), expected_repr)
 
 
 if __name__ == "__main__":

@@ -6,8 +6,8 @@ class HTMLNode:
         self,
         tag: Optional[str],
         value: Optional[str],
-        children: List["HTMLNode"],
-        props: Dict[str, str],
+        children: Optional[List["HTMLNode"]],
+        props: Optional[Dict[str, str]],
     ) -> None:
         self.tag = tag
         self.value = value
@@ -19,12 +19,14 @@ class HTMLNode:
             self.tag}, {
             self.value}, {
             self.children}, {
-                self.props})"
+            self.props})"
 
     def to_html(self) -> str:
         raise NotImplementedError
 
     def props_to_html(self) -> str:
+        if self.props is None:
+            return " "
         return f" {" ".join(
             list(
                 map(

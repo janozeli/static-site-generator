@@ -1,4 +1,5 @@
 import unittest
+from typing import List, cast
 
 from src.htmlnode import HTMLNode
 
@@ -13,7 +14,9 @@ class TestHTMLNode(unittest.TestCase):
             {"href": "https://www.google.com", "target": "_blank"},
         )
         self.node_sem_props = HTMLNode("div", "Conteúdo", [], {})
-        self.node_filho = HTMLNode("span", "texto filho", [], {"class": "destaque"})
+        self.node_filho = HTMLNode(
+            "span", "texto filho", [], {"class": "destaque"}
+        )
         self.node_com_filhos = HTMLNode(
             "div", "", [self.node_filho], {"id": "container"}
         )
@@ -30,8 +33,9 @@ class TestHTMLNode(unittest.TestCase):
         )
 
         # Testa inicialização com filhos
-        self.assertEqual(len(self.node_com_filhos.children), 1)
-        self.assertEqual(self.node_com_filhos.children[0].tag, "span")
+        children = cast(List[HTMLNode], self.node_com_filhos.children)
+        self.assertEqual(len(children), 1)
+        self.assertEqual(children[0].tag, "span")
 
         # Testa inicialização com propriedades vazias
         self.assertEqual(self.node_sem_props.props, {})
@@ -41,19 +45,23 @@ class TestHTMLNode(unittest.TestCase):
 
     def test_repr(self) -> None:
         # Testa representação com propriedades
+        props_str = "{'href': 'https://www.google.com', 'target': '_blank'}"
         self.assertEqual(
             repr(self.node_com_props),
-            "HTMLNode(a, Link, [], {'href': 'https://www.google.com', 'target': '_blank'})",
+            f"HTMLNode(a, Link, [], {props_str})",
         )
 
         # Testa representação sem propriedades
-        self.assertEqual(repr(self.node_sem_props), "HTMLNode(div, Conteúdo, [], {})")
+        self.assertEqual(
+            repr(self.node_sem_props), "HTMLNode(div, Conteúdo, [], {})"
+        )
 
         # Testa representação com filhos
         node_filho_repr = repr(self.node_filho)
+        container_props = "{'id': 'container'}"
         self.assertEqual(
             repr(self.node_com_filhos),
-            f"HTMLNode(div, , [{node_filho_repr}], {{'id': 'container'}})",
+            f"HTMLNode(div, , [{node_filho_repr}], {container_props})",
         )
 
         # Testa representação de nó vazio
@@ -117,7 +125,8 @@ class TestHTMLNode(unittest.TestCase):
         filho1 = HTMLNode("li", "Item 1", [], {})
         filho2 = HTMLNode("li", "Item 2", [], {})
         node_multiplos_filhos = HTMLNode("ul", "", [filho1, filho2], {})
-        self.assertEqual(len(node_multiplos_filhos.children), 2)
+        children = cast(List[HTMLNode], node_multiplos_filhos.children)
+        self.assertEqual(len(children), 2)
 
 
 if __name__ == "__main__":

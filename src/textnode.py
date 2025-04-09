@@ -23,9 +23,9 @@ class TextNode:
         if not isinstance(other, TextNode):
             return False
         return (
-            self.text == other.text and
-            self.text_type == other.text_type and
-            self.url == other.url
+            self.text == other.text
+            and self.text_type == other.text_type
+            and self.url == other.url
         )
 
     def __repr__(self) -> str:
