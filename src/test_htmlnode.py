@@ -13,9 +13,7 @@ class TestHTMLNode(unittest.TestCase):
             {"href": "https://www.google.com", "target": "_blank"},
         )
         self.node_sem_props = HTMLNode("div", "Conteúdo", [], {})
-        self.node_filho = HTMLNode(
-            "span", "texto filho", [], {"class": "destaque"}
-        )
+        self.node_filho = HTMLNode("span", "texto filho", [], {"class": "destaque"})
         self.node_com_filhos = HTMLNode(
             "div", "", [self.node_filho], {"id": "container"}
         )
@@ -45,25 +43,17 @@ class TestHTMLNode(unittest.TestCase):
         # Testa representação com propriedades
         self.assertEqual(
             repr(self.node_com_props),
-            "HTMLNode(a,"
-            "Link,"
-            "[],"
-            "{'href': 'https://www.google.com',"
-            "'target': '_blank'})",
+            "HTMLNode(a, Link, [], {'href': 'https://www.google.com', 'target': '_blank'})",
         )
 
         # Testa representação sem propriedades
-        self.assertEqual(
-            repr(self.node_sem_props), "HTMLNode(div, Conteúdo, [], {})"
-        )
+        self.assertEqual(repr(self.node_sem_props), "HTMLNode(div, Conteúdo, [], {})")
 
         # Testa representação com filhos
+        node_filho_repr = repr(self.node_filho)
         self.assertEqual(
             repr(self.node_com_filhos),
-            f"HTMLNode(div, , [{
-                repr(
-                    self.node_filho)}], {
-                'id': 'container'} )",
+            f"HTMLNode(div, , [{node_filho_repr}], {{'id': 'container'}})",
         )
 
         # Testa representação de nó vazio
