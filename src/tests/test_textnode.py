@@ -1,6 +1,6 @@
 import unittest
 
-from textnode import TextNode, TextType
+from src.textnode import TextNode, TextType
 
 
 class TestTextNode(unittest.TestCase):
@@ -64,14 +64,10 @@ class TestTextNode(unittest.TestCase):
 
     def test_repr(self) -> None:
         # Testa representação de nó normal
-        self.assertEqual(
-            repr(self.node_normal), "TextNode(Texto normal, 1, None)"
-        )
+        self.assertEqual(repr(self.node_normal), "TextNode(Texto normal, 1, None)")
 
         # Testa representação de nó com tipo BOLD
-        self.assertEqual(
-            repr(self.node_bold), "TextNode(Texto em negrito, 0, None)"
-        )
+        self.assertEqual(repr(self.node_bold), "TextNode(Texto em negrito, 0, None)")
 
         # Testa representação de nó com URL
         self.assertEqual(
