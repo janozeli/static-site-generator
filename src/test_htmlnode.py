@@ -7,10 +7,15 @@ class TestHTMLNode(unittest.TestCase):
     def setUp(self) -> None:
         # Configuração comum para os testes
         self.node_com_props = HTMLNode(
-            "a", "Link", [], {"href": "https://www.google.com", "target": "_blank"}
+            "a",
+            "Link",
+            [],
+            {"href": "https://www.google.com", "target": "_blank"},
         )
         self.node_sem_props = HTMLNode("div", "Conteúdo", [], {})
-        self.node_filho = HTMLNode("span", "texto filho", [], {"class": "destaque"})
+        self.node_filho = HTMLNode(
+            "span", "texto filho", [], {"class": "destaque"}
+        )
         self.node_com_filhos = HTMLNode(
             "div", "", [self.node_filho], {"id": "container"}
         )
@@ -40,11 +45,17 @@ class TestHTMLNode(unittest.TestCase):
         # Testa representação com propriedades
         self.assertEqual(
             repr(self.node_com_props),
-            "HTMLNode(a, Link, [], {'href': 'https://www.google.com', 'target': '_blank'})",
+            "HTMLNode(a,"
+            "Link,"
+            "[],"
+            "{'href': 'https://www.google.com',"
+            "'target': '_blank'})",
         )
 
         # Testa representação sem propriedades
-        self.assertEqual(repr(self.node_sem_props), "HTMLNode(div, Conteúdo, [], {})")
+        self.assertEqual(
+            repr(self.node_sem_props), "HTMLNode(div, Conteúdo, [], {})"
+        )
 
         # Testa representação com filhos
         self.assertEqual(
@@ -74,7 +85,10 @@ class TestHTMLNode(unittest.TestCase):
 
         # Testa conversão com tipos especiais de valores
         node_props_especiais = HTMLNode(
-            "input", "", [], {"type": "text", "disabled": "true", "data-id": "123"}
+            "input",
+            "",
+            [],
+            {"type": "text", "disabled": "true", "data-id": "123"},
         )
         props_html = node_props_especiais.props_to_html()
         self.assertIn('type="text"', props_html)

@@ -16,7 +16,8 @@ class TestTextNode(unittest.TestCase):
         self.node_image = TextNode(
             "Imagem de exemplo",
             TextType.IMAGE,
-            "https://example.com/image.jpg")
+            "https://example.com/image.jpg",
+        )
         self.node_vazio = TextNode("", TextType.NORMAL)
 
     def test_init(self) -> None:
@@ -64,13 +65,13 @@ class TestTextNode(unittest.TestCase):
     def test_repr(self) -> None:
         # Testa representação de nó normal
         self.assertEqual(
-            repr(
-                self.node_normal),
-            "TextNode(Texto normal, 1, None)")
+            repr(self.node_normal), "TextNode(Texto normal, 1, None)"
+        )
 
         # Testa representação de nó com tipo BOLD
-        self.assertEqual(repr(self.node_bold),
-                         "TextNode(Texto em negrito, 0, None)")
+        self.assertEqual(
+            repr(self.node_bold), "TextNode(Texto em negrito, 0, None)"
+        )
 
         # Testa representação de nó com URL
         self.assertEqual(
