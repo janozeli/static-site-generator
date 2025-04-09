@@ -113,7 +113,7 @@ help:
 	@echo "  make venv       - Cria ambiente virtual Python (.venv)"
 	@echo "  make install    - Instala dependências básicas + requirements.txt"
 	@echo "  make run        - Executa o programa principal (main.py)"
-	@echo "  make test       - Executa testes unitários na pasta src"
+	@echo "  make test       - Executa testes unitários na pasta src/tests"
 	@echo "  make typecheck  - Verificação estática de tipos com mypy"
 	@echo "  make lint       - Verificação de estilo com flake8"
 	@echo "  make fix        - Correções automáticas (imports, formatação básica)"
